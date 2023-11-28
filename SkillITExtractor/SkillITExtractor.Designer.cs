@@ -55,8 +55,8 @@
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.menuStripOptions = new System.Windows.Forms.MenuStrip();
-            this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBarProcessing = new System.Windows.Forms.ProgressBar();
             this.groupBoxSelectionCriteria.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
@@ -343,6 +343,11 @@
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
+            // optionsToolStripMenuItem1
+            // 
+            this.optionsToolStripMenuItem1.Name = "optionsToolStripMenuItem1";
+            this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(32, 19);
+            // 
             // progressBarProcessing
             // 
             this.progressBarProcessing.Location = new System.Drawing.Point(468, 182);
@@ -368,6 +373,7 @@
             this.MainMenuStrip = this.menuStripOptions;
             this.Name = "SkillITMain";
             this.Text = "SkillIT Linked In Extractor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SkillITMain_FormClosing);
             this.Load += new System.EventHandler(this.SkillITMain_Load);
             this.groupBoxSelectionCriteria.ResumeLayout(false);
             this.groupBoxSelectionCriteria.PerformLayout();

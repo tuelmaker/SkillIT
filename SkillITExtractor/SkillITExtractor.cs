@@ -501,6 +501,16 @@ namespace SkillITForm
                 MessageBox.Show(Text = $"{Resources.Refresh_Login_Failure}\r\n{webEx.Message}", Constants.ERROR_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// Clean up afterwards
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SkillITMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            webDriver.Quit();
+        }
     }
 }
 
