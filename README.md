@@ -15,6 +15,7 @@ Use the parser tool to load the JSON and flatten it.
 
 
 Example of parser output.
+
 ![image](https://github.com/tuelmaker/SkillIT/assets/30091037/c4503dcb-8d11-4394-8b4f-bb813bdc33ee)
 
 Here is an example of the JSON once we run it through the SkillIT Parser. You can used as-is or within a pivot table to get more refinement.
