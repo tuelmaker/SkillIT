@@ -6,3 +6,6 @@
 # Usage
 
 -In order to use this project you will need to have a LinkedIn account and access to the LinkedIn premium features which enables the skills comparison lookup. 
+
+![image](https://github.com/tuelmaker/SkillIT/assets/30091037/f7d6e852-9cb5-496d-ab55-88dcedcaba51)
+
