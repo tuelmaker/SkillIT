@@ -6,10 +6,13 @@
 # Usage
 
 -In order to use this project you will need to have a LinkedIn account and access to the LinkedIn premium features which enables the skills comparison lookup. 
-
+--Initial URL is based on specific criteria, but you are free to change it to whatever search works for you
 ![image](https://github.com/tuelmaker/SkillIT/assets/30091037/f7d6e852-9cb5-496d-ab55-88dcedcaba51)
 
 
-
+--Use the parser tool to load the JSON and flatten it.
 ![image](https://github.com/tuelmaker/SkillIT/assets/30091037/57c3be32-6484-48be-93ba-8f231308d8a7)
 
+
+--Example of parser output:
+![image](https://github.com/tuelmaker/SkillIT/assets/30091037/c4503dcb-8d11-4394-8b4f-bb813bdc33ee)
