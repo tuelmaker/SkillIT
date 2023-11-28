@@ -10,13 +10,16 @@ Initial URL is based on specific criteria, but you are free to change it to what
 ![image](https://github.com/tuelmaker/SkillIT/assets/30091037/f7d6e852-9cb5-496d-ab55-88dcedcaba51)
 
 
+
 Use the parser tool to load the JSON and flatten it.
 ![image](https://github.com/tuelmaker/SkillIT/assets/30091037/57c3be32-6484-48be-93ba-8f231308d8a7)
 
 
-Example of the parser output when viewed in an Excel Pivot Table.
 
+Example of the parser output when viewed in an Excel Pivot Table.
 ![image](https://github.com/tuelmaker/SkillIT/assets/30091037/c4503dcb-8d11-4394-8b4f-bb813bdc33ee)
+
+
 
 Here is an example of the JSON once we run it through the SkillIT Parser. You can used as-is or within a pivot table to get more refinement.
 [Jobs_Flattened_small.csv](https://github.com/tuelmaker/SkillIT/files/13492967/Jobs_Flattened_small.csv)
