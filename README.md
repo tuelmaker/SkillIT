@@ -18,3 +18,6 @@ Use the parser tool to load the JSON and flatten it
 Example of parser output
 
 ![image](https://github.com/tuelmaker/SkillIT/assets/30091037/c4503dcb-8d11-4394-8b4f-bb813bdc33ee)
+
+
+[Jobs_Flattened_small.csv](https://github.com/tuelmaker/SkillIT/files/13492967/Jobs_Flattened_small.csv)
