@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extractor", "SkillITForm\Extractor.csproj", "{FE0E7C8E-9050-4306-AD75-53AD22EA13C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extractor", "SkillITExtractor\Extractor.csproj", "{FE0E7C8E-9050-4306-AD75-53AD22EA13C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "skillitmodels\Models.csproj", "{F57A2FA1-C740-436F-B9FE-1FE2D014FFD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "SkillITModels\Models.csproj", "{F57A2FA1-C740-436F-B9FE-1FE2D014FFD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "SkillITParser\Parser.csproj", "{C6B5ABF2-2510-4465-924D-4465A5244C76}"
 EndProject

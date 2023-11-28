@@ -88,7 +88,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\skillitmodels\Models.csproj">
+    <ProjectReference Include="..\SkillITModels\Models.csproj">
       <Project>{f57a2fa1-c740-436f-b9fe-1fe2d014ffd0}</Project>
       <Name>Models</Name>
     </ProjectReference>
