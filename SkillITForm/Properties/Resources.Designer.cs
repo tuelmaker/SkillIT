@@ -122,5 +122,15 @@ namespace SkillIT.Properties {
                 return ResourceManager.GetString("Save_Extract_Missing", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon SkillITLogo {
+            get {
+                object obj = ResourceManager.GetObject("SkillITLogo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

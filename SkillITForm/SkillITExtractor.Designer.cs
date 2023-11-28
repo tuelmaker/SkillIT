@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SkillITMain));
             this.textBoxInitialJobSearchURL = new System.Windows.Forms.TextBox();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxExtractedInformation = new System.Windows.Forms.TextBox();
@@ -52,10 +53,11 @@
             this.labelLoginStatus = new System.Windows.Forms.Label();
             this.buttonSaveJSON = new System.Windows.Forms.Button();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.menuStripOptions = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBarProcessing = new System.Windows.Forms.ProgressBar();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.groupBoxSelectionCriteria.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.menuStripOptions.SuspendLayout();
@@ -75,7 +77,7 @@
             this.buttonLogin.Location = new System.Drawing.Point(105, 103);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(52, 28);
-            this.buttonLogin.TabIndex = 2;
+            this.buttonLogin.TabIndex = 5;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = false;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
@@ -88,7 +90,7 @@
             this.textBoxExtractedInformation.Name = "textBoxExtractedInformation";
             this.textBoxExtractedInformation.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxExtractedInformation.Size = new System.Drawing.Size(821, 279);
-            this.textBoxExtractedInformation.TabIndex = 3;
+            this.textBoxExtractedInformation.TabIndex = 8;
             // 
             // buttonExtractInformation
             // 
@@ -97,7 +99,7 @@
             this.buttonExtractInformation.Location = new System.Drawing.Point(12, 211);
             this.buttonExtractInformation.Name = "buttonExtractInformation";
             this.buttonExtractInformation.Size = new System.Drawing.Size(824, 62);
-            this.buttonExtractInformation.TabIndex = 5;
+            this.buttonExtractInformation.TabIndex = 7;
             this.buttonExtractInformation.Text = "Extract Information";
             this.buttonExtractInformation.UseVisualStyleBackColor = false;
             this.buttonExtractInformation.Click += new System.EventHandler(this.buttonExtractInformation_Click);
@@ -134,7 +136,7 @@
             this.textBoxUserName.Location = new System.Drawing.Point(105, 50);
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(336, 20);
-            this.textBoxUserName.TabIndex = 9;
+            this.textBoxUserName.TabIndex = 2;
             // 
             // textBoxPassword
             // 
@@ -142,14 +144,14 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(336, 20);
-            this.textBoxPassword.TabIndex = 10;
+            this.textBoxPassword.TabIndex = 3;
             // 
             // buttonGetJobCount
             // 
             this.buttonGetJobCount.Location = new System.Drawing.Point(12, 182);
             this.buttonGetJobCount.Name = "buttonGetJobCount";
             this.buttonGetJobCount.Size = new System.Drawing.Size(207, 23);
-            this.buttonGetJobCount.TabIndex = 11;
+            this.buttonGetJobCount.TabIndex = 6;
             this.buttonGetJobCount.Text = "Get Job Count";
             this.buttonGetJobCount.UseVisualStyleBackColor = true;
             this.buttonGetJobCount.Click += new System.EventHandler(this.buttonGetJobCount_Click);
@@ -178,7 +180,7 @@
             this.comboBoxLimitJobLookup.Location = new System.Drawing.Point(204, 69);
             this.comboBoxLimitJobLookup.Name = "comboBoxLimitJobLookup";
             this.comboBoxLimitJobLookup.Size = new System.Drawing.Size(143, 21);
-            this.comboBoxLimitJobLookup.TabIndex = 8;
+            this.comboBoxLimitJobLookup.TabIndex = 4;
             // 
             // label7
             // 
@@ -197,6 +199,7 @@
             this.comboBoxJobListingPeriod.Name = "comboBoxJobListingPeriod";
             this.comboBoxJobListingPeriod.Size = new System.Drawing.Size(143, 21);
             this.comboBoxJobListingPeriod.TabIndex = 6;
+            this.comboBoxJobListingPeriod.TabStop = false;
             // 
             // label6
             // 
@@ -226,6 +229,7 @@
             this.comboBoxEmploymentType.Name = "comboBoxEmploymentType";
             this.comboBoxEmploymentType.Size = new System.Drawing.Size(143, 21);
             this.comboBoxEmploymentType.TabIndex = 3;
+            this.comboBoxEmploymentType.TabStop = false;
             // 
             // checkBoxOnSite
             // 
@@ -235,6 +239,7 @@
             this.checkBoxOnSite.Name = "checkBoxOnSite";
             this.checkBoxOnSite.Size = new System.Drawing.Size(61, 17);
             this.checkBoxOnSite.TabIndex = 2;
+            this.checkBoxOnSite.TabStop = false;
             this.checkBoxOnSite.Text = "On-Site";
             this.checkBoxOnSite.UseVisualStyleBackColor = true;
             // 
@@ -246,6 +251,7 @@
             this.checkBoxHybrid.Name = "checkBoxHybrid";
             this.checkBoxHybrid.Size = new System.Drawing.Size(56, 17);
             this.checkBoxHybrid.TabIndex = 1;
+            this.checkBoxHybrid.TabStop = false;
             this.checkBoxHybrid.Text = "Hybrid";
             this.checkBoxHybrid.UseVisualStyleBackColor = true;
             // 
@@ -257,6 +263,7 @@
             this.checkBoxRemote.Name = "checkBoxRemote";
             this.checkBoxRemote.Size = new System.Drawing.Size(63, 17);
             this.checkBoxRemote.TabIndex = 0;
+            this.checkBoxRemote.TabStop = false;
             this.checkBoxRemote.Text = "Remote";
             this.checkBoxRemote.UseVisualStyleBackColor = true;
             // 
@@ -285,7 +292,7 @@
             this.buttonSaveJSON.Location = new System.Drawing.Point(12, 564);
             this.buttonSaveJSON.Name = "buttonSaveJSON";
             this.buttonSaveJSON.Size = new System.Drawing.Size(824, 62);
-            this.buttonSaveJSON.TabIndex = 17;
+            this.buttonSaveJSON.TabIndex = 9;
             this.buttonSaveJSON.Text = "Save JSON to File";
             this.buttonSaveJSON.UseVisualStyleBackColor = false;
             this.buttonSaveJSON.Click += new System.EventHandler(this.buttonSaveJSON_Click);
@@ -308,6 +315,17 @@
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Login";
             // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Enabled = false;
+            this.buttonRefresh.Location = new System.Drawing.Point(163, 103);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(92, 28);
+            this.buttonRefresh.TabIndex = 17;
+            this.buttonRefresh.Text = "Refresh Login";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // menuStripOptions
             // 
             this.menuStripOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -316,7 +334,7 @@
             this.menuStripOptions.Name = "menuStripOptions";
             this.menuStripOptions.Size = new System.Drawing.Size(848, 24);
             this.menuStripOptions.TabIndex = 19;
-            this.menuStripOptions.Text = "menuStrip1";
+            this.menuStripOptions.Text = "menuStripOptions";
             // 
             // optionsToolStripMenuItem
             // 
@@ -332,17 +350,6 @@
             this.progressBarProcessing.Size = new System.Drawing.Size(368, 23);
             this.progressBarProcessing.TabIndex = 20;
             // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.Enabled = false;
-            this.buttonRefresh.Location = new System.Drawing.Point(163, 103);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(92, 28);
-            this.buttonRefresh.TabIndex = 17;
-            this.buttonRefresh.Text = "Refresh Login";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
             // SkillITMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -357,6 +364,7 @@
             this.Controls.Add(this.buttonExtractInformation);
             this.Controls.Add(this.textBoxExtractedInformation);
             this.Controls.Add(this.menuStripOptions);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripOptions;
             this.Name = "SkillITMain";
             this.Text = "SkillIT Linked In Extractor";
@@ -401,5 +409,6 @@
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progressBarProcessing;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem1;
     }
 }
