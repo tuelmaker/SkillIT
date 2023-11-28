@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SkillITForm")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SkillIT")]
+[assembly: AssemblyDescription("Linked In Skills Extractor for Premium")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SkillITForm")]
+[assembly: AssemblyCompany("tuelmaker")]
+[assembly: AssemblyProduct("SkillIT")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

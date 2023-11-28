@@ -120,6 +120,7 @@ namespace SkillITForm
 #endif
 
 #if DEBUG
+                this.Text=  $"{this.Text} {Application.ProductVersion} [DEBUG]";
                 webDriver.Navigate().GoToUrl("https://www.bing.com");
 
 #endif
@@ -421,6 +422,8 @@ namespace SkillITForm
         /// <param name="e"></param>
         private void SkillITMain_Load(object sender, EventArgs e)
         {
+            this.Text = $"{this.Text} {Application.ProductVersion}";
+
             /// disable until we have retrieved the job count
             buttonExtractInformation.Enabled = false;
 
@@ -467,6 +470,7 @@ namespace SkillITForm
                 {
                     File.WriteAllText(saveFileDialog.FileName, textBoxExtractedInformation.Text);
                 }
+                saveFileDialog.Dispose();
             }
         }
 
