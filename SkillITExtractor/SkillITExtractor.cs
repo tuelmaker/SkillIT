@@ -509,7 +509,17 @@ namespace SkillITForm
         /// <param name="e"></param>
         private void SkillITMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            webDriver.Quit();
+            try
+            {
+                if (webDriver != null)
+                {
+                    webDriver.Quit();
+                }
+            }catch
+            {
+                /// do nothing
+            }
+            
         }
     }
 }
