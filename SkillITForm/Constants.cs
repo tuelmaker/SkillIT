@@ -52,6 +52,7 @@ namespace SkillITForm
         public const string APPLICANT_COUNT_MISSING_LOOKUP_NAME = "Applicant_Count_Missing";
         public const string LOGIN_FAILURE_LOOKUP_NAME = "Login_Failure";
         public const string NO_JOBS_FOUND_LOOKUP_NAME = "No_Jobs_Found_Search_Response";
+        public const string NOTHING_TO_SAVE_LOOKUP_NAME = "Save_Extract_Missing";
         #endregion
 
         public const string COMMA = ",";
@@ -61,6 +62,11 @@ namespace SkillITForm
         public const string ERROR_TITLE = "Error";
 
         public const string ISOLATED_STORAGE_FILE_JSON = "SkillIT_OPTIONS.json";
+
+        public const string BASE_JOB_SEARCH_URL = "https://www.linkedin.com/jobs/search/?currentJobId=";
+
+        public const int DEFAULT_ZOOM_LEVEL = 100;
+        public const int MAGNIFIED_ZOOM_LEVEL = 25;
 
     }
 }

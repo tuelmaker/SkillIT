@@ -15,7 +15,7 @@ namespace Skillit.Models
         public string Location { get; set; }    = string.Empty;
         public string PostStatus { get; set; }= string.Empty;
         public string PostedDaysAgo { get; set; }= string.Empty;
-        public string ApplicantCount { get; set; } = string.Empty;  
+        public int ApplicantCount { get; set; } = -1;  
         public List<string> MatchingSkills { get; set; } = new List<string>();
         public List<string> MissingSkills { get; set; } =   new List<string>();
         public List<string> ApplicantSkills { get; set; } = new List<string>();

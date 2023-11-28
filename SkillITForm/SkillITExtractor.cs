@@ -49,7 +49,10 @@ namespace SkillITForm
         /// <exception cref="NotImplementedException"></exception>
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBarProcessing.Value = e.ProgressPercentage;
+            if (e.ProgressPercentage <= progressBarProcessing.Maximum)
+            {
+                progressBarProcessing.Value = e.ProgressPercentage;
+            }
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -88,7 +91,7 @@ namespace SkillITForm
                         i+=1;
 
                     }
-                    catch (Exception ex)
+                    catch 
                     {
                         /// do nothing
                     }
@@ -99,22 +102,60 @@ namespace SkillITForm
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-
-            webDriver.Navigate().GoToUrl(textBoxInitialJobSearchURL.Text);            
-            webDriver.FindElement(By.CssSelector(Constants.LOGIN_BUTTON_CLASS_NAME)).Click();
-            webDriver.FindElement(By.Id(Constants.USERNAME_TEXTBOX_ID)).SendKeys(textBoxUserName.Text);
-            webDriver.FindElement(By.Id(Constants.PASSWORD_TEXTBOX_ID)).SendKeys(textBoxPassword.Text);
-            webDriver.FindElement(By.CssSelector(Constants.LOGIN_SUBMIT_BUTTON_CLASS_NAME)).Click();
-            Thread.Sleep(optionsModel.LoginWait);
+            webDriver = GetWebDriver();
             try
             {
+#if RELEASE
+                webDriver.Navigate().GoToUrl(textBoxInitialJobSearchURL.Text);
+                webDriver.FindElement(By.CssSelector(Constants.LOGIN_BUTTON_CLASS_NAME)).Click();
+                webDriver.FindElement(By.Id(Constants.USERNAME_TEXTBOX_ID)).SendKeys(textBoxUserName.Text);
+                webDriver.FindElement(By.Id(Constants.PASSWORD_TEXTBOX_ID)).SendKeys(textBoxPassword.Text);
+                webDriver.FindElement(By.CssSelector(Constants.LOGIN_SUBMIT_BUTTON_CLASS_NAME)).Click();
+
+                /// we need to wait for the page to load before we can check the status of the login
+                Thread.Sleep(optionsModel.LoginWait);
+
                 labelLoginStatus.Text = webDriver.FindElement(By.CssSelector(Constants.LOGIN_STATUS_EVALUATION_CLASS_NAME))
                     .FindElement(By.TagName(Constants.SPAN_TAG)).Text == "Me" ? "Logged In" : "Not Logged In";
+#endif
+
+#if DEBUG
+                webDriver.Navigate().GoToUrl("https://www.bing.com");
+
+#endif
+
+                BrowserAdjuster.SetZoomLevelPercentage(webDriver,Constants.MAGNIFIED_ZOOM_LEVEL);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
-                labelLoginStatus.Text = Resources.ResourceManager.GetString(Constants.LOGIN_FAILURE_LOOKUP_NAME);
+                labelLoginStatus.Text = $"{Resources.Login_Failure}\r\n{ex.Message}";
+                buttonRefresh.Enabled = true;
+                return;
             }
+        }
+
+        /// <summary>
+        /// Sets the web driver to the appropriate browser based on the options configured.
+        /// </summary>
+        /// <returns><see cref="WebDriver"/></returns>
+        private WebDriver GetWebDriver()
+        {
+            switch (optionsModel.BrowserSelected)
+            {
+                case BrowserOptionEnum.Chrome:
+                    webDriver = new ChromeDriver();
+                    break;
+                case BrowserOptionEnum.Firefox:
+                    webDriver = new FirefoxDriver();
+                    break;
+                case BrowserOptionEnum.Edge:
+                    webDriver = new EdgeDriver();
+                    break;
+                default:
+                    webDriver = new ChromeDriver();
+                    break;
+            }
+            return webDriver;
         }
 
 
@@ -131,7 +172,9 @@ namespace SkillITForm
             progressBarProcessing.Visible = true;
             progressBarProcessing.Maximum = jobsFound;
             progressBarProcessing.Minimum = 0;
-            
+            progressBarProcessing.Value = 0;
+
+
 
             List<int> incrementList = GenerateListOfNumbersIncrementedByValueUpToValue(Constants.JOB_INCREMENT_NUMBER);
             jobInformationModelList.Clear();
@@ -144,20 +187,20 @@ namespace SkillITForm
         private void UpdateJobsFound()
         {
 
-        try
+            try
             {
                 IWebElement jobsFoundContainer = webDriver.FindElement(By.ClassName(Constants.JOBS_FOUND_COUNT_CLASS_NAME));
                 jobsFound = int.Parse(jobsFoundContainer.FindElement(By.TagName(Constants.SPAN_TAG)).Text
                     .Split(new string[] { Constants.SINGLESPACE }, StringSplitOptions.RemoveEmptyEntries)
                     .ToList()[0]
-                    .Replace(Constants.COMMA,string.Empty));
+                    .Replace(Constants.COMMA, string.Empty));
 
-                if(comboBoxLimitJobLookup.SelectedIndex > 0)
+                if (comboBoxLimitJobLookup.SelectedIndex > 0)
                 {
                     jobsFound = int.Parse(comboBoxLimitJobLookup.SelectedItem.ToString());
                 }
             }
-            catch(Exception ex)
+            catch
             {
                 // default to 100 jobs found if we can't find the element or value of the element
                 jobsFound = 100;
@@ -172,25 +215,39 @@ namespace SkillITForm
         /// <param name="e"></param>
         private void buttonGetJobCount_Click(object sender, EventArgs e)
         {
-            webDriver.Navigate().GoToUrl(textBoxInitialJobSearchURL.Text);
-            Thread.Sleep(optionsModel.PageLoadWait);
-
-            UpdateJobsFound();
-
-            if (jobsFound == 0)
+            try
             {
-                MessageBox.Show(Resources.ResourceManager.GetString(Constants.NO_JOBS_FOUND_LOOKUP_NAME), Constants.ERROR_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                webDriver.Navigate().GoToUrl(textBoxInitialJobSearchURL.Text);
+                Thread.Sleep(optionsModel.PageLoadWait);
+
+                UpdateJobsFound();
+
+                if (jobsFound == 0)
+                {
+                    MessageBox.Show(Resources.No_Jobs_Found_Search_Response, Constants.ERROR_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                labelJobsFound.Text = $"Jobs Found: {jobsFound}";
+
+                buttonExtractInformation.Enabled = true;
+            }
+            catch(NullReferenceException nullEx)
+            {
+                MessageBox.Show($"WebDriver may not be initialized, please login\r\n{nullEx.Message}", Constants.ERROR_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, Constants.ERROR_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            labelJobsFound.Text = $"Jobs Found: {jobsFound}";
         }
 
         /// <summary>
         /// Build a new url which we can then use to page through the jobs    
         /// </summary>
         /// <param name="increment"></param>
-        /// <returns></returns>
+        /// <returns><see cref="String"/></returns>
         private string IncrementJobLookup(int increment)
         {
             return new Url(string.Format(textBoxInitialJobSearchURL.Text + "&start={0}", increment)).Value;
@@ -205,12 +262,12 @@ namespace SkillITForm
             JobInformationModel jobInformationModel = new JobInformationModel();
 
             jobInformationModel.JobId = jobDetailPanel
-                .FindElement(By.CssSelector(Constants.JOBS_FOUND_COUNT_CLASS_NAME))
+                .FindElement(By.CssSelector(Constants.JOB_DETAIL_PANEL_CLASS_NAME))
                 .FindElement(By.TagName(Constants.ANCHOR_TAG))
                 .GetAttribute(Constants.HREF_ATTRIBUTE)
                 .Split(new char[] { Path.AltDirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries)[4];
 
-            jobInformationModel.JobUrl = $"https://www.linkedin.com/jobs/search/?currentJobId={jobInformationModel.JobId}";
+            jobInformationModel.JobUrl = $"{Constants.BASE_JOB_SEARCH_URL}{jobInformationModel.JobId}";
 
 
             /// Get the title of the job
@@ -226,20 +283,34 @@ namespace SkillITForm
 
             jobInformationModel.CompanyName = jobDetailLineSplit[0].Trim();
 
-            jobInformationModel.ApplicantCount = jobDetailLineSplit.Count() == Constants.JOB_DETAIL_SEGMENT_COUNT
-                ? jobDetailLineSplit[Constants.JOB_DETAIL_SEGMENT_APPLICANT_INDEX].Trim()
-                : SkillIT.Properties.Resources.ResourceManager.GetString(Constants.APPLICANT_COUNT_MISSING_LOOKUP_NAME);
+            int applicantCount = -1;
+            if(jobDetailLineSplit.Count() == Constants.JOB_DETAIL_SEGMENT_COUNT)
+            {
+                int.TryParse(jobDetailLineSplit[Constants.JOB_DETAIL_SEGMENT_APPLICANT_INDEX]
+                                                 .Replace("Over", string.Empty)
+                                                 .Replace("Applicants", string.Empty)
+                                                 .Trim(), out applicantCount);
+            }
+                                                
+            jobInformationModel.ApplicantCount = applicantCount;
 
-            jobInformationModel.PostStatus = jobDetailLineSplit[1].Contains(Constants.JOB_POSTING_STATUS_REPOSTED) ? Constants.JOB_POSTING_STATUS_REPOSTED : Constants.JOB_POSTING_STATUS_NEW;
-            jobInformationModel.PostedDaysAgo = jobDetailLineSplit[1].Split(new string[] { Constants.JOB_DETAIL_SPLIT_DOUBLE_SPACE }, StringSplitOptions.RemoveEmptyEntries)
-                .Last()
-                .Trim();
-            jobInformationModel.Location = jobDetailLineSplit[1].Split(new string[] { Constants.JOB_DETAIL_SPLIT_DOUBLE_SPACE }, StringSplitOptions.RemoveEmptyEntries)
+            jobInformationModel.PostStatus = jobDetailLineSplit[1].Contains(Constants.JOB_POSTING_STATUS_REPOSTED) 
+                                                ? Constants.JOB_POSTING_STATUS_REPOSTED 
+                                                : Constants.JOB_POSTING_STATUS_NEW;
+            jobInformationModel.PostedDaysAgo = jobDetailLineSplit[1]
+                .Split(new string[] { Constants.JOB_DETAIL_SPLIT_DOUBLE_SPACE }, StringSplitOptions.RemoveEmptyEntries)
+                 .Last()
+                 .Trim();
+
+            jobInformationModel.Location = jobDetailLineSplit[1]
+                .Split(new string[] { Constants.JOB_DETAIL_SPLIT_DOUBLE_SPACE }, StringSplitOptions.RemoveEmptyEntries)
                 .First()
                 .Replace(Constants.JOB_POSTING_STATUS_REPOSTED, string.Empty)
                 .Trim();
 
-            ReadOnlyCollection<IWebElement> elements = jobDetailPanel.FindElements(By.CssSelector(Constants.JOB_SKILLS_SECTION_CLASS_NAME));
+            ReadOnlyCollection<IWebElement> elements = jobDetailPanel
+                                                       .FindElements(
+                                                        By.CssSelector(Constants.JOB_SKILLS_SECTION_CLASS_NAME));
 
             for (int s = 0; s < elements.Count; s++)
             {
@@ -307,8 +378,8 @@ namespace SkillITForm
             if (jobInformationModelList.Count == 0)
             {
                 MessageBox.Show(
-                    SkillIT.Properties.Resources.ResourceManager.GetString(Constants.DUMP_ERROR_RESOURCE_DESCRIPTION_LOOKUP_NAME),
-                    SkillIT.Properties.Resources.ResourceManager.GetString(Constants.DUMP_ERROR_RESOURCE_TITLE_LOOKUP_NAME),
+                    Resources.Dump_Error_Description,
+                    Resources.Dump_Error_Title,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
@@ -317,6 +388,11 @@ namespace SkillITForm
             textBoxExtractedInformation.Text = Newtonsoft.Json.JsonConvert.SerializeObject(jobInformationModelList);
         }
 
+        /// <summary>
+        /// Allow user to change the options related to the UI processing and which browser to use
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChildForms.OptionsForm optionsForm = new ChildForms.OptionsForm();
@@ -326,50 +402,58 @@ namespace SkillITForm
 
         }
 
+        /// <summary>
+        /// Process certain actions once the options form has been closed, like reloading 
+        /// the options and re-enabling the main form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OptionsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            optionsModel = iso.GetIsolatedStorage();
             this.Enabled = true;
         }
 
+        /// <summary>
+        /// Load the options from storage when the form loads and possibly other data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SkillITMain_Load(object sender, EventArgs e)
         {
+            /// disable until we have retrieved the job count
+            buttonExtractInformation.Enabled = false;
+
             optionsModel = new OptionsModel();
 
             optionsModel = LoadOptionsFromStorage();
-
-            switch(optionsModel.BrowserSelected)
-            {
-                case BrowserOptionEnum.Chrome:
-                    webDriver = new ChromeDriver();
-                    break;
-                case BrowserOptionEnum.Firefox:
-                    webDriver = new FirefoxDriver();
-                    break;
-                case BrowserOptionEnum.Edge:
-                    webDriver = new EdgeDriver();
-                    break;
-                default:
-                    webDriver = new ChromeDriver();
-                    break;
-            }            
             
-            Thread.Sleep(optionsModel.PageLoadWait);
+            //// NOTE: we may need to scale the UI in order to fully read all the jobs presented
+            ///        as it appears that these are not being loaded in the background
             //webDriver.ExecuteScript("document.body.style.zoom='25%';");
-
             
         }
 
+        /// <summary>
+        /// Load options from storage
+        /// </summary>
+        /// <returns></returns>
         private OptionsModel LoadOptionsFromStorage()
         {
             iso = new IsolatedStorageOptions();
              return iso.GetIsolatedStorage();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSaveJSON_Click(object sender, EventArgs e)
         {
             if(textBoxExtractedInformation.Text.Length == 0)
             {
-                MessageBox.Show("No information to save", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.Save_Extract_Missing, Constants.ERROR_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -383,6 +467,34 @@ namespace SkillITForm
                 {
                     File.WriteAllText(saveFileDialog.FileName, textBoxExtractedInformation.Text);
                 }
+            }
+        }
+
+        /// <summary>
+        /// This button is simply used to determine if we have successfully logged in or not, and
+        /// can be used to determine the logged-in status even after the login button has been clicked
+        /// or we have had to manually login due to a LinkedIn redirect for a new login, etc.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                labelLoginStatus.Text = webDriver.FindElement(By.CssSelector(Constants.LOGIN_STATUS_EVALUATION_CLASS_NAME))
+                                                 .FindElement(By.TagName(Constants.SPAN_TAG)).Text == "Me" 
+                                                        ? "Logged In" 
+                                                        : "Not Logged In";
+                if (labelLoginStatus.Text == "Logged In")
+                {
+                    buttonRefresh.Enabled = false;
+                }
+
+                BrowserAdjuster.SetZoomLevelPercentage(webDriver, Constants.MAGNIFIED_ZOOM_LEVEL);
+            }
+            catch(WebDriverException webEx)
+            {
+                MessageBox.Show(Text = $"{Resources.Refresh_Login_Failure}\r\n{webEx.Message}", Constants.ERROR_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

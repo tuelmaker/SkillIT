@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Schema;
+using SkillITParser.Properties;
 
 namespace SkillITParser
 {
@@ -48,11 +49,16 @@ namespace SkillITParser
             try
             {
                 jobInformationModels = JsonConvert.DeserializeObject<List<JobInformationModel>>(jsonFileContents);
+
                 return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"The data does not correspond to the JobInformationModel so it cannot be deserialized\r\n\r\n{GetJsonSchema().Format}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    $"{Resources.Parser_Error}\r\n\r\n{GetJsonSchema().Format}\r\n{ex.Message}", 
+                    "Error", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
                 return false;
             }
            

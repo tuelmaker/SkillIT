@@ -55,6 +55,7 @@
             this.menuStripOptions = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBarProcessing = new System.Windows.Forms.ProgressBar();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.groupBoxSelectionCriteria.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.menuStripOptions.SuspendLayout();
@@ -69,12 +70,14 @@
             // 
             // buttonLogin
             // 
+            this.buttonLogin.BackColor = System.Drawing.Color.ForestGreen;
+            this.buttonLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.buttonLogin.Location = new System.Drawing.Point(105, 103);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(150, 23);
+            this.buttonLogin.Size = new System.Drawing.Size(52, 28);
             this.buttonLogin.TabIndex = 2;
             this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.UseVisualStyleBackColor = false;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // textBoxExtractedInformation
@@ -188,6 +191,7 @@
             // 
             // comboBoxJobListingPeriod
             // 
+            this.comboBoxJobListingPeriod.Enabled = false;
             this.comboBoxJobListingPeriod.FormattingEnabled = true;
             this.comboBoxJobListingPeriod.Location = new System.Drawing.Point(204, 46);
             this.comboBoxJobListingPeriod.Name = "comboBoxJobListingPeriod";
@@ -197,6 +201,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Enabled = false;
             this.label6.Location = new System.Drawing.Point(107, 49);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(90, 13);
@@ -206,6 +211,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Enabled = false;
             this.label5.Location = new System.Drawing.Point(107, 26);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 13);
@@ -214,6 +220,7 @@
             // 
             // comboBoxEmploymentType
             // 
+            this.comboBoxEmploymentType.Enabled = false;
             this.comboBoxEmploymentType.FormattingEnabled = true;
             this.comboBoxEmploymentType.Location = new System.Drawing.Point(204, 21);
             this.comboBoxEmploymentType.Name = "comboBoxEmploymentType";
@@ -223,6 +230,7 @@
             // checkBoxOnSite
             // 
             this.checkBoxOnSite.AutoSize = true;
+            this.checkBoxOnSite.Enabled = false;
             this.checkBoxOnSite.Location = new System.Drawing.Point(30, 71);
             this.checkBoxOnSite.Name = "checkBoxOnSite";
             this.checkBoxOnSite.Size = new System.Drawing.Size(61, 17);
@@ -233,6 +241,7 @@
             // checkBoxHybrid
             // 
             this.checkBoxHybrid.AutoSize = true;
+            this.checkBoxHybrid.Enabled = false;
             this.checkBoxHybrid.Location = new System.Drawing.Point(30, 48);
             this.checkBoxHybrid.Name = "checkBoxHybrid";
             this.checkBoxHybrid.Size = new System.Drawing.Size(56, 17);
@@ -243,6 +252,7 @@
             // checkBoxRemote
             // 
             this.checkBoxRemote.AutoSize = true;
+            this.checkBoxRemote.Enabled = false;
             this.checkBoxRemote.Location = new System.Drawing.Point(30, 23);
             this.checkBoxRemote.Name = "checkBoxRemote";
             this.checkBoxRemote.Size = new System.Drawing.Size(63, 17);
@@ -282,6 +292,7 @@
             // 
             // groupBoxLogin
             // 
+            this.groupBoxLogin.Controls.Add(this.buttonRefresh);
             this.groupBoxLogin.Controls.Add(this.buttonLogin);
             this.groupBoxLogin.Controls.Add(this.textBoxInitialJobSearchURL);
             this.groupBoxLogin.Controls.Add(this.labelLoginStatus);
@@ -320,6 +331,17 @@
             this.progressBarProcessing.Name = "progressBarProcessing";
             this.progressBarProcessing.Size = new System.Drawing.Size(368, 23);
             this.progressBarProcessing.TabIndex = 20;
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Enabled = false;
+            this.buttonRefresh.Location = new System.Drawing.Point(163, 103);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(92, 28);
+            this.buttonRefresh.TabIndex = 17;
+            this.buttonRefresh.Text = "Refresh Login";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // SkillITMain
             // 
@@ -378,5 +400,6 @@
         private System.Windows.Forms.MenuStrip menuStripOptions;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progressBarProcessing;
+        private System.Windows.Forms.Button buttonRefresh;
     }
 }

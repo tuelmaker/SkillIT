@@ -59,5 +59,68 @@ namespace SkillIT.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to locate the number of applicants for this job.
+        /// </summary>
+        internal static string Applicant_Count_Missing {
+            get {
+                return ResourceManager.GetString("Applicant_Count_Missing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was nothing found to extract. This may be due to a bug. Please contact the application owner..
+        /// </summary>
+        internal static string Dump_Error_Description {
+            get {
+                return ResourceManager.GetString("Dump_Error_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extraction Error.
+        /// </summary>
+        internal static string Dump_Error_Title {
+            get {
+                return ResourceManager.GetString("Dump_Error_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to login, please verify credentials and url.
+        /// </summary>
+        internal static string Login_Failure {
+            get {
+                return ResourceManager.GetString("Login_Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No jobs were able to be located based on this search.
+        /// </summary>
+        internal static string No_Jobs_Found_Search_Response {
+            get {
+                return ResourceManager.GetString("No_Jobs_Found_Search_Response", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to refresh the login status, please login again.
+        /// </summary>
+        internal static string Refresh_Login_Failure {
+            get {
+                return ResourceManager.GetString("Refresh_Login_Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No information to save.
+        /// </summary>
+        internal static string Save_Extract_Missing {
+            get {
+                return ResourceManager.GetString("Save_Extract_Missing", resourceCulture);
+            }
+        }
     }
 }

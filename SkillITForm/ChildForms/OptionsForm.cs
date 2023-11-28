@@ -8,13 +8,26 @@ namespace SkillITForm.ChildForms
 {
     public partial class OptionsForm : Form
     {
+        /// <summary>
+        /// Options model to hold the options
+        /// </summary>
         OptionsModel options;
-        IsolatedStorageOptions iso;
+
+        /// <summary>
+        /// Isolated storage options class to handle the isolated storage of the options
+        /// </summary>
+        IsolatedStorageOptions optionStorage;
+
         public OptionsForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Prime the form with combobox values and trigger the load of the options from isolated storage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OptionsForm_Load(object sender, EventArgs e)
         {
             
@@ -29,8 +42,8 @@ namespace SkillITForm.ChildForms
 
             try
             {
-                iso = new IsolatedStorageOptions();
-                options = iso.GetIsolatedStorage();
+                optionStorage = new IsolatedStorageOptions();
+                options = optionStorage.GetIsolatedStorage();
                 LoadValuesFromStorage(options);                
             }
             catch (Exception ex)
@@ -39,6 +52,11 @@ namespace SkillITForm.ChildForms
             }
         }
 
+        /// <summary>
+        /// Retrieve the options from the form
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns><see cref="OptionsModel"/></returns>
         private OptionsModel GetCurrentlySetOptions(OptionsModel options)
         {
             options.PageLoadWait = (int)comboBoxPageLoadWait.SelectedItem;
@@ -49,6 +67,10 @@ namespace SkillITForm.ChildForms
             return options;
         }
 
+        /// <summary>
+        /// Load the values from isolated storage into the form
+        /// </summary>
+        /// <param name="options"></param>
         private void LoadValuesFromStorage(OptionsModel options)
         {
             comboBoxJobNavigationWait.SelectedItem = options.JobNavigationWait;
@@ -71,13 +93,32 @@ namespace SkillITForm.ChildForms
             }
         }
 
+        /// <summary>
+        /// Trigger save of options to isolated storage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            try
+            {               
+                SaveOptions();
+                MessageBox.Show("Options Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unable to save the options to storage:{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>
+        /// Save the options to isolated storage
+        /// </summary>
+        private void SaveOptions()
+        {
             options = GetCurrentlySetOptions(options);
-            iso.SetIsolatedStorage(options);
-            
-            MessageBox.Show("Options Saved", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            optionStorage.SetIsolatedStorage(options);
         }
     }
 }

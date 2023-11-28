@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO.IsolatedStorage;
-using SkillIT.Models;
+﻿using SkillIT.Models;
 using SkillITForm;
+using System.IO.IsolatedStorage;
 
 namespace SkillIT
 {
+    /// <summary>
+    /// Class to handle the isolated storage of the options
+    /// </summary>
     internal class IsolatedStorageOptions
     {
-        public OptionsModel SetIsolatedStorage(OptionsModel options)
+        /// <summary>
+        /// Set the options in isolated storage and return them back
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public void SetIsolatedStorage(OptionsModel options)
         { 
             using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForAssembly())
             {
@@ -22,11 +25,14 @@ namespace SkillIT
                         writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(options));
                     }
                 }
-            }
-            return options;
+            }          
 
         }
 
+        /// <summary>
+        /// Retrieve the options from isolated storage
+        /// </summary>
+        /// <returns><see cref="OptionsModel"/></returns>
         public OptionsModel GetIsolatedStorage()
         {
             OptionsModel options = new OptionsModel();
