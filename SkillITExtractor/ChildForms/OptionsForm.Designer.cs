@@ -1,4 +1,4 @@
-﻿namespace SkillITForm.ChildForms
+﻿namespace SkillIT.ChildForms
 {
     partial class OptionsForm
     {

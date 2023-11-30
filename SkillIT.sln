@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "SkillITModels\Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "SkillITParser\Parser.csproj", "{C6B5ABF2-2510-4465-924D-4465A5244C76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillITTest", "SkillITTest\SkillITTest.csproj", "{C14CC01B-C61D-454F-B05E-AE96A6399A68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C6B5ABF2-2510-4465-924D-4465A5244C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6B5ABF2-2510-4465-924D-4465A5244C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6B5ABF2-2510-4465-924D-4465A5244C76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14CC01B-C61D-454F-B05E-AE96A6399A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14CC01B-C61D-454F-B05E-AE96A6399A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14CC01B-C61D-454F-B05E-AE96A6399A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14CC01B-C61D-454F-B05E-AE96A6399A68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

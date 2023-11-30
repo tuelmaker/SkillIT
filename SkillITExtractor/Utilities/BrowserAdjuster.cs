@@ -8,31 +8,16 @@ using System.Threading.Tasks;
 
 namespace SkillIT
 {
+    /// <summary>
+    /// Browser adjustment class
+    /// </summary>
     internal class BrowserAdjuster
     {
-        public static void AdjustBrowser()
-        {
- 
-        }
-
-        public static void SetMagnificationLevel(WebDriver webDriver)
-        {
-            WebElement html = (WebElement)webDriver.FindElement(By.TagName("html"));
-
-            new Actions(webDriver)
-                .SendKeys(html, $"{Keys.Control}{Keys.Add}{Keys.Null}")
-                .Perform();
-        }
-
-        public static void ResetMagnificationLevel(WebDriver webDriver)
-        {
-            WebElement html = (WebElement)webDriver.FindElement(By.TagName("html"));
-
-            new Actions(webDriver)
-                .SendKeys(html, $"{Keys.Control}{Keys.NumberPad0}{Keys.Null}")
-                .Perform();
-        }
-
+        /// <summary>
+        /// Set the zoom level of the browser
+        /// </summary>
+        /// <param name="webDriver"></param>
+        /// <param name="zoomPercentage"></param>
         public static void SetZoomLevelPercentage(WebDriver webDriver, int zoomPercentage)
         {
             webDriver.ExecuteScript($"document.body.style.zoom='{zoomPercentage}%'");

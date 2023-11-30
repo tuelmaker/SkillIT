@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace SkillITForm.ChildForms
+namespace SkillIT.ChildForms
 {
     public partial class OptionsForm : Form
     {

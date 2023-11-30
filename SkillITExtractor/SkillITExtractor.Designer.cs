@@ -1,4 +1,4 @@
-﻿namespace SkillITForm
+﻿namespace SkillIT
 {
     partial class SkillITMain
     {

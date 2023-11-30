@@ -2,9 +2,6 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Interactions;
-using Skillit.Models;
-using SkillIT;
 using SkillIT.Models;
 using SkillIT.Properties;
 using System;
@@ -18,17 +15,22 @@ using System.Security.Policy;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace SkillITForm
+
+namespace SkillIT
 {
     public partial class SkillITMain : Form
     {
         public OptionsModel optionsModel;
-        BackgroundWorker backgroundWorker = new BackgroundWorker();
-        WebDriver webDriver;
-        List<JobInformationModel> jobInformationModelList = new List<JobInformationModel>();
-        Dictionary<string, string> exceptions = new Dictionary<string, string>();
-        int jobsFound = 0;
-        IsolatedStorageOptions iso;
+        private BackgroundWorker backgroundWorker = new BackgroundWorker();
+        private WebDriver webDriver;
+        private List<JobInformationModel> jobInformationModelList = new List<JobInformationModel>();
+        private Dictionary<string, string> exceptions = new Dictionary<string, string>();
+        private int jobsFound = 0;
+        private IsolatedStorageOptions iso;
+
+        /// <summary>
+        /// Main execution point for the application
+        /// </summary>
         public SkillITMain()
         {
             InitializeComponent();

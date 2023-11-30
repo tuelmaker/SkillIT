@@ -1,5 +1,4 @@
 ﻿using SkillIT.Models;
-using SkillITForm;
 using System.IO.IsolatedStorage;
 
 namespace SkillIT

@@ -1,4 +1,4 @@
-﻿using Skillit.Models;
+﻿using SkillIT.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

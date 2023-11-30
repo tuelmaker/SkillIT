@@ -27,7 +27,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>SkillIT Extractor</ProductName>
     <PublisherName>tuelmaker</PublisherName>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -91,6 +91,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBrowserAdjuster.cs" />
+    <Compile Include="Interfaces\IIsolatedStorage.cs" />
     <Compile Include="Utilities\BrowserAdjuster.cs" />
     <Compile Include="ChildForms\OptionsForm.cs">
       <SubType>Form</SubType>
